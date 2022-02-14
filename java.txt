@@ -1,0 +1,139 @@
+Prova desafio programacao
+
+01)
+function escada(altura){
+  let lista = [];
+  for(let i = 1; i <= altura; i++){
+    let espaco = altura - i;
+    lista.push(" ".repeat(espaco) + "#".repeat(i));
+  }
+  return lista;
+}
+
+
+02)import java.util.Random;
+
+public class GeradorSenha {
+
+
+	public static void main(String[] args) {
+
+		String senha = gerarSenha(6);
+
+		System.out.println(senha);
+
+	}
+
+	private static String gerarSenha(int tamanho) {
+
+		String senha = "";
+		boolean senhaOK = false;
+
+		String[] letrasL = { "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+				"a", "s", "d", "f", "g", "h", "j", "k", "l", "ç", "z", "x",
+				"c", "v", "b", "n", "m" };
+
+		String[] letrasU = { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+				"A", "S", "D", "F", "G", "H", "J", "K", "L", "Ç", "Z", "X",
+				"C", "V", "B", "N", "M" };
+
+		String[] numeros = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+
+		String[] caracteres = { "!", "@", "_", "$", "%", "&", "*", ".", "/",
+				"#", "?" };
+
+		do {
+
+			int r = new Random().nextInt(4) + 1;
+
+			switch (r) {
+
+			case 1:
+
+				r = new Random().nextInt(26);
+				for (; r < letrasL.length;) {
+					senha = senha.concat(letrasL[r]);
+					break;
+				}
+				break;
+
+			case 2:
+
+				r = new Random().nextInt(26);
+				for (; r < letrasU.length;) {
+					senha = senha.concat(letrasU[r]);
+					break;
+				}
+				break;
+
+			case 3:
+
+				r = new Random().nextInt(9);
+				for (; r < numeros.length;) {
+					senha = senha.concat(numeros[r]);
+					break;
+				}
+				break;
+
+			case 4:
+
+				r = new Random().nextInt(10);
+				for (; r < caracteres.length;) {
+					senha = senha.concat(caracteres[r]);
+					break;
+				}
+				break;
+			}
+
+			// verifica se há pelo menos 1 caracter de cada tipo
+			for (int i = 0; i < letrasL.length; i++) {
+
+				for (int j = 0; j < letrasU.length; j++) {
+
+					for (int l = 0; l < numeros.length; l++) {
+
+						for (int k = 0; k < caracteres.length; k++) {
+
+							if (senha.contains(letrasL[i])
+									&& senha.contains(letrasU[j])
+									&& senha.contains(numeros[l])
+									&& senha.contains(caracteres[k])) {
+								senhaOK = true;
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+		} while (senha.length() < tamanho);
+
+		// Esta saída testa se há pelo menos um caracteres  de cada tipo na senha
+		System.out.println(senhaOK);
+		return senha;
+
+	}
+
+3)public class Anagrama {
+
+	public static void main(String[] args) {
+		String palavra = "ovo";
+		imprimeAnagramas("", palavra);
+
+	}
+
+	public static void imprimeAnagramas(String prefix, String word) {
+		if (word.length() <= 1) {
+			System.out.println(prefix + word);
+		} else {
+			for (int i = 0; i < word.length(); i++) {
+				String cur = word.substring(i, i + 1);
+				String before = word.substring(0, i); 
+				String after = word.substring(i + 1); 
+				imprimeAnagramas(prefix + cur, before + after);
+			}
+		}
+	}
